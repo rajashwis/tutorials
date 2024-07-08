@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
     _name = "estate.property"
-    _description = "Properties of Estates"
+    _description = "Properties"
 
     name = fields.Char('Title', required=True)
     description = fields.Text('Description')
@@ -29,3 +29,5 @@ class EstateProperty(models.Model):
         copy = False
     )
     active = fields.Boolean(default = True)
+
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
