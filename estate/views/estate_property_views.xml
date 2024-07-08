@@ -33,7 +33,9 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <sheet>
-                    <h1><field name = "name"/></h1><br/>
+                    <h1><field name = "name"/></h1>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <br/>
                     <group>
                         <group>
                             <field name="property_type_id"/>
