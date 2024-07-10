@@ -38,7 +38,7 @@ class EstateProperty(models.Model):
     buyer_id = fields.Many2one('res.partner', string="Buyer")
     salesperson_id = fields.Many2one('res.users', string='Salesperson', copy = False, default=lambda self: self.env.uid)
 
-    tag_ids = fields.Many2many('estate.property.tag', string='Taxes')
+    tag_ids = fields.Many2many('estate.property.tag', string='Tags')
 
     offer_ids = fields.One2many('estate.property.offer', 'property_id')
 
@@ -60,6 +60,8 @@ class EstateProperty(models.Model):
     def _compute_best_price(self):
         for line in self:
             if line.offer_ids:
+                if(line.state != 'offer_received'):
+                    line.state="offer_received"
                 line.best_offer = max(line.offer_ids.mapped('price'))
             else:
                 line.best_offer = 0
